@@ -7,12 +7,22 @@ class AppTheme {
     primaryColor: AppColors.primaryColor,
     brightness: Brightness.light,
     scaffoldBackgroundColor: Colors.white,
-    textTheme: GoogleFonts.dmSerifTextTextTheme(),
+    textTheme: GoogleFonts.dmSerifTextTextTheme(
+      TextTheme(
+        bodyMedium: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+              fontSize: 24,
+            ),
+      )
+    ),
     appBarTheme: const AppBarTheme(
       backgroundColor: Colors.white,
       elevation: 0,
+      centerTitle: true,
       surfaceTintColor: Colors.white,
       iconTheme: IconThemeData(color: Colors.black),
     ),
+    
   );
 }

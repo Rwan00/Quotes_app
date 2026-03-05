@@ -6,10 +6,13 @@ class QuoteEntity extends Equatable {
   final String quote;
   final String permaLink;
 
-  const QuoteEntity({required this.author, required this.id, required this.quote, required this.permaLink});
+  const QuoteEntity({
+    required this.author,
+    required this.id,
+    required this.quote,
+    required this.permaLink,
+  });
 
-  
   @override
-  // TODO: implement props
-  List<Object?> get props => throw UnimplementedError();
+  List<Object?> get props => [author, id, quote, permaLink];
 }

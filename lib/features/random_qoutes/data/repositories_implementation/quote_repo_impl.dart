@@ -23,13 +23,15 @@ class QuoteRepoImpl implements QuoteRepository {
     if (await networkInfo.isConnected) {
       try {
         final remoteRandomeQuote = await quoteRemoteDatasource.getRandomQuote();
+        quoteLocalDatasource.cacheQuote(remoteRandomeQuote);
         return Right(remoteRandomeQuote);
       } on ServerException {
         return Left(ServerFailure());
       }
-    }else{
-       try {
-        final cacheRandomeQuote = await quoteLocalDatasource.getLastRandomQuote();
+    } else {
+      try {
+        final cacheRandomeQuote = await quoteLocalDatasource
+            .getLastRandomQuote();
         return Right(cacheRandomeQuote);
       } on CacheException {
         return Left(CacheFailure());

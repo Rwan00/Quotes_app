@@ -14,6 +14,16 @@ class AppTheme {
               fontWeight: FontWeight.bold,
               fontSize: 24,
             ),
+            titleMedium: TextStyle(
+              color: AppColors.primaryColor,
+              fontWeight: FontWeight.bold,
+              fontSize: 28,
+            ),
+            bodySmall: TextStyle(
+              color: Colors.grey,
+              fontWeight: FontWeight.bold,
+              fontSize: 18,
+            ),
       )
     ),
     appBarTheme: const AppBarTheme(

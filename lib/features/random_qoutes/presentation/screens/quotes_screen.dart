@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:qoutes/core/utils/app_colors.dart';
+import 'package:qoutes/core/widgets/custom_error_widget.dart';
 import 'package:qoutes/features/random_qoutes/presentation/cubit/quotes_cubit.dart';
 import 'package:qoutes/features/random_qoutes/presentation/widgets/quote_card.dart';
 
@@ -17,7 +18,7 @@ class _QuotesScreenState extends State<QuotesScreen> {
     return BlocBuilder<QuotesCubit, QuotesState>(
       builder: (context, state) {
          if (state is QuotesError) {
-          return Text("Error");
+          return CustomErrorWidget(onPressed:()=> context.read<QuotesCubit>().getRandomQuotes(),);
         }
         else if(state is QuotesLoaded){
 return Center(

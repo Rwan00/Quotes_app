@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:qoutes/config/routes/app_routes.dart';
 import 'package:qoutes/config/themes/app_theme.dart';
-import 'package:qoutes/core/utils/app_colors.dart';
-import 'package:qoutes/features/random_qoutes/presentation/screens/quotes_screen.dart';
+
 
 class QoutesApp extends StatelessWidget {
   const QoutesApp({super.key});
@@ -12,8 +12,8 @@ class QoutesApp extends StatelessWidget {
     return MaterialApp(
    debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme,
-      home: QuotesScreen(),
-    
+     onGenerateRoute: AppRoutes.onGenerateRoute,
+initialRoute: Routes.initialRoute,
     );
   }
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:qoutes/features/random_qoutes/presentation/cubit/quotes_cubit.dart';
-
+import 'package:qoutes/injection_container.dart' as di;
 import 'package:qoutes/features/random_qoutes/presentation/screens/quotes_screen.dart';
 
 class Routes {
@@ -14,7 +14,7 @@ class AppRoutes {
       case Routes.initialRoute:
         return MaterialPageRoute(
           builder: (context) => BlocProvider(
-            create: (context) => QuotesCubit(quoteUsecase: null),
+            create: (context) => di.sl<QuotesCubit>(),
             child: QuotesScreen(),
           ),
         );

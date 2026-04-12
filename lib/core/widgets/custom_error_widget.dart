@@ -9,11 +9,12 @@ class CustomErrorWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
       spacing: 15,
       children: [
         Icon(
-          Icons.warning_amber_outlined,
-          size: 48,
+          Icons.warning_amber_rounded,
+          size: 52,
           color: AppColors.primaryColor,
         ),
         Text(
@@ -27,8 +28,10 @@ class CustomErrorWidget extends StatelessWidget {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(26),
             ),
+            backgroundColor: AppColors.primaryColor,
+            foregroundColor: Colors.white,
           ),
-          child: Text("Reload Screen"),
+          child: Text("Reload Screen", style: TextStyle(color: Colors.white)),
         ),
       ],
     );

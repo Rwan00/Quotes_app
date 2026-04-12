@@ -1,4 +1,4 @@
 class Endpoints {
-  static String baseUrl = "http://quotes.stormconsultancy.co.uk";
-  static String randomQuote = "$baseUrl/random.json";
+  static String baseUrl = "https://motivational-spark-api.vercel.app/api";
+  static String randomQuote = "$baseUrl/quotes/random";
 }

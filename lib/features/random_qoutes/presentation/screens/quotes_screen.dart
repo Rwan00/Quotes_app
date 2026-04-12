@@ -17,35 +17,37 @@ class _QuotesScreenState extends State<QuotesScreen> {
   Widget _buildBodyContent() {
     return BlocBuilder<QuotesCubit, QuotesState>(
       builder: (context, state) {
-         if (state is QuotesError) {
-          return CustomErrorWidget(onPressed:()=> context.read<QuotesCubit>().getRandomQuotes(),);
-        }
-        else if(state is QuotesLoaded){
-return Center(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-
-            children: [
-              QuoteCard(quote: state.quote),
-              GestureDetector(
-                onTap: ()=>context.read<QuotesCubit>().getRandomQuotes(),
-                child: Container(
-                  margin: EdgeInsets.all(12),
-                  padding: EdgeInsets.all(12),
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: AppColors.primaryColor,
+        if (state is QuotesError) {
+          return Center(
+            child: CustomErrorWidget(
+              onPressed: () => context.read<QuotesCubit>().getRandomQuotes(),
+            ),
+          );
+        } else if (state is QuotesLoaded) {
+          return Center(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                QuoteCard(quote: state.quote),
+                GestureDetector(
+                  onTap: () => context.read<QuotesCubit>().getRandomQuotes(),
+                  child: Container(
+                    margin: EdgeInsets.all(12),
+                    padding: EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: AppColors.primaryColor,
+                    ),
+                    child: Icon(Icons.refresh, color: Colors.white, size: 28),
                   ),
-                  child: Icon(Icons.refresh, color: Colors.white, size: 28),
                 ),
-              ),
-            ],
-          ),
-        );
-        }else{
-         return Center(
+              ],
+            ),
+          );
+        } else {
+          return Center(
             child: SpinKitFadingCircle(
-              color: AppColors.primaryColor,
               itemBuilder: (BuildContext context, int index) {
                 return DecoratedBox(
                   decoration: BoxDecoration(
@@ -56,7 +58,6 @@ return Center(
             ),
           );
         }
-        
       },
     );
   }

@@ -10,11 +10,12 @@ part 'quotes_state.dart';
 
 class QuotesCubit extends Cubit<QuotesState> {
   final GetRandomQuoteUsecase quoteUsecase;
-  QuotesCubit({required this.quoteUsecase}) : super(QuotesInitial()){
+  QuotesCubit({required this.quoteUsecase}) : super(QuotesInitial()) {
     getRandomQuotes();
   }
 
   Future<void> getRandomQuotes() async {
+    emit(QuotesisLoading());
     Either<Failure, QuoteEntity> response = await quoteUsecase(NoParams());
 
     emit(

@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
+import 'dart:developer';
 
 import "package:http/http.dart" as http;
 
@@ -23,8 +24,11 @@ class QuoteRemoteDatasourceImpl implements QuoteRemoteDatasource {
       headers: {"Content-Type": "application/json"},
     );
     if (response.statusCode == 200) {
+      log("success");
+      log(response.body);
       return QuoteModel.fromJson(json.decode(response.body));
     } else {
+      log("failed");
       throw ServerException();
     }
   }

@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
@@ -27,14 +28,14 @@ class DioConsumer implements ApiConsumer {
         return status! < StatusCode.internalServerError;
       };
     client.interceptors.add(di.sl<AppInterceptors>());
-    if(kDebugMode){
+    if (kDebugMode) {
       client.interceptors.add(di.sl<LogInterceptor>());
     }
   }
   @override
-  Future get(String path, {Map<String, dynamic>? queryParameters}) {
-    // TODO: implement get
-    throw UnimplementedError();
+  Future get(String path, {Map<String, dynamic>? queryParameters}) async {
+    final response = await client.get(path, queryParameters: queryParameters);
+    return _handleResponseAsJson(response);
   }
 
   @override
@@ -42,9 +43,9 @@ class DioConsumer implements ApiConsumer {
     String path, {
     Map<String, dynamic>? body,
     Map<String, dynamic>? queryParameters,
-  }) {
-    // TODO: implement post
-    throw UnimplementedError();
+  }) async{
+     final response = await client.post(path, queryParameters: queryParameters,data: body);
+    return _handleResponseAsJson(response);
   }
 
   @override
@@ -52,8 +53,13 @@ class DioConsumer implements ApiConsumer {
     String path, {
     Map<String, dynamic>? body,
     Map<String, dynamic>? queryParameters,
-  }) {
-    // TODO: implement put
-    throw UnimplementedError();
+  }) async{
+     final response = await client.put(path, queryParameters: queryParameters,data: body);
+    return _handleResponseAsJson(response);
+  }
+
+  dynamic _handleResponseAsJson(Response<dynamic> response) {
+    final responseJson = jsonDecode(response.data.toString());
+    return responseJson;
   }
 }

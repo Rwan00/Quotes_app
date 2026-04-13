@@ -1,3 +1,4 @@
+
 import 'package:dartz/dartz.dart';
 import 'package:qoutes/core/error/exceptions.dart';
 import 'package:qoutes/core/error/failure.dart';
@@ -20,22 +21,23 @@ class QuoteRepoImpl implements QuoteRepository {
 
   @override
   Future<Either<Failure, QuoteEntity>> getRandomQuote() async {
-    if (await networkInfo.isConnected) {
+    
+   
       try {
         final remoteRandomeQuote = await quoteRemoteDatasource.getRandomQuote();
         quoteLocalDatasource.cacheQuote(remoteRandomeQuote);
         return Right(remoteRandomeQuote);
       } on ServerException {
         return Left(ServerFailure());
-      }
-    } else {
-      try {
+      }catch (err){
+         try {
         final cacheRandomeQuote = await quoteLocalDatasource
             .getLastRandomQuote();
         return Right(cacheRandomeQuote);
       } on CacheException {
         return Left(CacheFailure());
       }
-    }
+      }
+   
   }
 }

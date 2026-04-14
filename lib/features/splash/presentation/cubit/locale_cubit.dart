@@ -5,5 +5,5 @@ import 'package:equatable/equatable.dart';
 part 'locale_state.dart';
 
 class LocaleCubit extends Cubit<LocaleState> {
-  LocaleCubit() : super(LocaleInitial());
+  LocaleCubit() : super(ChangeLocaleState(Locale("en")));
 }

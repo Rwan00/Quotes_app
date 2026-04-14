@@ -9,6 +9,6 @@ sealed class LocaleState extends Equatable {
 }
 
 final class ChangeLocaleState extends LocaleState {
-  final Locale selectedLocale;
-  const ChangeLocaleState(this.selectedLocale) : super(selectedLocale);
+
+  const ChangeLocaleState(super.selectedLocale);
 }

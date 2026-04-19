@@ -13,7 +13,7 @@ class QoutesApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => di.sl<LocaleCubit>(),
+      create: (context) => di.sl<LocaleCubit>()..getSavedLang(),
       child: BlocBuilder<LocaleCubit, LocaleState>(
         buildWhen: (previousState, currentState) {
           return previousState != currentState;
@@ -24,6 +24,7 @@ class QoutesApp extends StatelessWidget {
             theme: AppTheme.lightTheme,
             onGenerateRoute: AppRoutes.onGenerateRoute,
             initialRoute: Routes.initialRoute,
+            locale: state.locale,
             supportedLocales: AppLocalizationsSetup.supportedLocales,
             localeResolutionCallback:
                 AppLocalizationsSetup.localeResolutionCallback,

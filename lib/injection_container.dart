@@ -11,6 +11,12 @@ import 'package:qoutes/features/random_qoutes/data/repositories_implementation/q
 import 'package:qoutes/features/random_qoutes/domain/repositories/quote_repository.dart';
 import 'package:qoutes/features/random_qoutes/domain/usecases/get_random_quote_usecase.dart';
 import 'package:qoutes/features/random_qoutes/presentation/cubit/quotes_cubit.dart';
+import 'package:qoutes/features/splash/data/datasources/lang_locale_datasource.dart';
+import 'package:qoutes/features/splash/data/repositories/lang_repository_impl.dart';
+import 'package:qoutes/features/splash/domain/repositories/lang_repository.dart';
+import 'package:qoutes/features/splash/domain/usecases/change_lang_usecase.dart';
+import 'package:qoutes/features/splash/domain/usecases/get_saved_lang_usecase.dart';
+import 'package:qoutes/features/splash/presentation/cubit/locale_cubit.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import "package:http/http.dart" as http;
 
@@ -22,9 +28,20 @@ Future<void> init() async {
   //Blocs
   sl.registerFactory<QuotesCubit>(() => QuotesCubit(quoteUsecase: sl()));
 
+  sl.registerFactory<LocaleCubit>(
+    () => LocaleCubit(changeLangUseCase: sl(), getSavedLangUsecase: sl()),
+  );
+
   //UseCases
   sl.registerLazySingleton<GetRandomQuoteUsecase>(
     () => GetRandomQuoteUsecase(quoteRepository: sl()),
+  );
+
+  sl.registerLazySingleton<GetSavedLangUsecase>(
+    () => GetSavedLangUsecase(langRepository: sl()),
+  );
+  sl.registerLazySingleton<ChangeLangUseCase>(
+    () => ChangeLangUseCase(langRepository: sl()),
   );
 
   //Ripository
@@ -36,6 +53,12 @@ Future<void> init() async {
     ),
   );
 
+  sl.registerLazySingleton<LangRepository>(
+    () => LangRepositoryImpl(
+      langLocaleDatasource: sl()
+    ),
+  );
+
   //DataSources
   sl.registerLazySingleton<QuoteLocalDatasource>(
     () => QuoteLocalDataSourceImpl(sharedPreferences: sl()),
@@ -43,6 +66,10 @@ Future<void> init() async {
 
   sl.registerLazySingleton<QuoteRemoteDatasource>(
     () => QuoteRemoteDatasourceImpl(apiConsumer: sl()),
+  );
+
+  sl.registerLazySingleton<LangLocaleDatasource>(
+    () => LangLocaleDatasourceImpl(sharedPreferences: sl()),
   );
 
   //! Core

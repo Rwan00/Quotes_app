@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:qoutes/config/locale/app_localizations.dart';
 import 'package:qoutes/core/utils/app_colors.dart';
 
 class CustomErrorWidget extends StatelessWidget {
@@ -18,10 +19,10 @@ class CustomErrorWidget extends StatelessWidget {
           color: AppColors.primaryColor,
         ),
         Text(
-          "Something Went Wrong",
+          AppLocalizations.of(context)!.translate("something_went_wrong")!,
           style: Theme.of(context).textTheme.titleMedium,
         ),
-        Text("Please Try Again", style: Theme.of(context).textTheme.bodySmall),
+        Text(AppLocalizations.of(context)!.translate("try_again")!, style: Theme.of(context).textTheme.bodySmall),
         ElevatedButton(
           onPressed: onPressed,
           style: ElevatedButton.styleFrom(
@@ -31,7 +32,7 @@ class CustomErrorWidget extends StatelessWidget {
             backgroundColor: AppColors.primaryColor,
             foregroundColor: Colors.white,
           ),
-          child: Text("Reload Screen", style: TextStyle(color: Colors.white)),
+          child: Text(AppLocalizations.of(context)!.translate("reload_screen")!, style: TextStyle(color: Colors.white)),
         ),
       ],
     );

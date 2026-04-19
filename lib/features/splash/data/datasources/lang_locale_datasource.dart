@@ -1,8 +1,9 @@
+import 'package:qoutes/core/utils/app_consts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class LangLocaleDatasource {
   Future<bool> changeLang({required String langCode});
-  Future<String?> getSavedLang();
+  Future<String> getSavedLang();
 }
 
 class LangLocaleDatasourceImpl implements LangLocaleDatasource {
@@ -16,9 +17,9 @@ class LangLocaleDatasourceImpl implements LangLocaleDatasource {
   }
 
   @override
-  Future<String?> getSavedLang() async {
+  Future<String> getSavedLang() async {
     return sharedPreferences.containsKey("locale")
-        ? sharedPreferences.getString("locale")
-        : "en";
+        ? sharedPreferences.getString("locale")!
+        : AppConsts.englishCode;
   }
 }

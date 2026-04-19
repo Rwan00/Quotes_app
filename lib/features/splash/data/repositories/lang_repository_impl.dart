@@ -21,7 +21,7 @@ class LangRepositoryImpl implements LangRepository {
   }
 
   @override
-  Future<Either<Failure, String?>> getSavedLang() async {
+  Future<Either<Failure, String>> getSavedLang() async {
     try {
       final langCode = await langLocaleDatasource.getSavedLang();
       return Right(langCode);
